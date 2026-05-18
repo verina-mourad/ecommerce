@@ -3,6 +3,75 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+  .loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #FFF #FFF transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent #FF3D00 #FF3D00;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: #FFF #FFF transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+    
+.icon-circle{
+  @apply w-10 h-10 flex items-center justify-center shrink-0
+}
+.icon-container{
+  @apply flex items-center gap-2 w-full
+}
+.heart-icon {
+  animation: bounceY 1.5s infinite;
+}
+
+@keyframes bounceY {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); } /* يطلع لفوق */
+  100% { transform: translateY(0); }   /* يرجع */
+}
 
 @theme inline {
     --font-heading: var(--font-sans);
