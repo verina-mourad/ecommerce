@@ -7,7 +7,7 @@ export async function AddWishlist(Id:string){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist`,{method:'POST',
+        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/wishlist`,{method:'POST',
             body:JSON.stringify({
                 productId:Id
             }),
@@ -32,7 +32,7 @@ export async function Getwishlist(){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist`,{method:'GET',
+        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/wishlist`,{method:'GET',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,
@@ -54,7 +54,7 @@ export async function RemoveWishlist(Id:string){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist/${Id}`,{method:'delete',
+        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/wishlist/${Id}`,{method:'delete',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,
@@ -76,7 +76,7 @@ export async function ClearWishlist(){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist`,{method:'delete',
+        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/wishlist`,{method:'delete',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,

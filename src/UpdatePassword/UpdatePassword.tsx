@@ -17,7 +17,7 @@ export async function UpdatePasswordAction(value: {
   try {
 
     const res = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/users/changeMyPassword`,
+      `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/users/changeMyPassword`,
       {
         method: 'PUT',
 

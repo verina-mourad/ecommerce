@@ -16,7 +16,7 @@ export default async function Page({
   console.log(name);
   // subcategories
   const res = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/categories/${id}/subcategories`,
+    `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/categories/${id}/subcategories`,
     { cache: 'no-store' }
   )
 
@@ -25,7 +25,7 @@ export default async function Page({
 
   // categories (for name)
   const catRes = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/categories`,
+    `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/categories`,
     { cache: 'no-store' }
   )
 

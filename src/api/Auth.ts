@@ -1,8 +1,7 @@
-const BASE_URL = "https://ecommerce.routemisr.com/api/v1/auth"
 
 // VERIFY CODE
 export async function verifyResetCodeAPI(data: { resetCode: string }) {
-  const res = await fetch(`${BASE_URL}/verifyResetCode`, {
+  const res = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/verifyResetCode`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
@@ -13,7 +12,7 @@ export async function verifyResetCodeAPI(data: { resetCode: string }) {
 
 // RESEND CODE
 export async function resendResetCodeAPI(email: string) {
-  const res = await fetch(`${BASE_URL}/forgotPasswords`, {
+  const res = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/forgotPasswords`, {
     method: "POST",
     body: JSON.stringify({ email }),
     headers: { "Content-Type": "application/json" },

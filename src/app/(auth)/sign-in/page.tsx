@@ -48,28 +48,6 @@ password: z
   type RegisterType=z.infer<typeof SchemaSignIn>
   async function HandleLogin(value:RegisterType){
      (true)
-    // try{
-    //   const res=await fetch(`https://ecommerce.routemisr.com/api/v1/auth/signin`,{
-    //     method:'POST',
-    //     body:JSON.stringify(value),
-    //     headers:{'Content-Type': 'application/json'}
-    //   })
-    //   const data = await res.json()
-    //   if(res.ok){
-    //     toast('Registered successfully 🎉',{position:'top-center'})
-    //     router.push('/')
-    //     }
-    //     else{
-    //     toast.error(data.message)
-    //     }
-    // }
-
-    // catch(error){
-    //       toast.error("Something went wrong")
-    // }
-    // finally{
-    //       setLoading(false)
-    //     }
     const data =await signIn ('credentials',{
       email:value.email,
       password:value.password,

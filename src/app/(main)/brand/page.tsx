@@ -13,7 +13,7 @@ export default function Page() {
     const fetchBrands = async () => {
       try {
         const res = await fetch(
-          `https://ecommerce.routemisr.com/api/v1/brands`
+          `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/brands`
         )
 
         const data = await res.json()
