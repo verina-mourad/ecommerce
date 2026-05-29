@@ -58,12 +58,11 @@ export default async function Page({
       </Link>
 
       {/* header */}
-      <div className='flex items-center bg-gray-100 gap-2 shadow-2xl rounded'>
-
-        <FaCircle className='text-blue-400 animate-pulse' />
-
+      <div className='flex flex-col md:flex-row items-center bg-gray-100 gap-2 shadow-2xl rounded'>
+        <div className='flex gap-1 items-center'>
+          <FaCircle className='text-blue-400 animate-pulse' />
         <p>{categoryDetails.length} Subcategories</p>
-
+        </div>
         <p className='text-gray-400'>
           found in{' '}
           <span className='text-blue-400'>

@@ -14,6 +14,7 @@ import Link from 'next/link'
 import AddWish from './AddWish'
 import { FaTrashAlt } from 'react-icons/fa'
 import FilterSideBar from './FilterSideBar'
+import WishlistAddAction from './WishlistAddAction'
 
 type Props = {
   products: any[]
@@ -140,45 +141,62 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
               {filteredProducts.map((product) => (
-                <div
-                  key={product._id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border"
-                >
+                 <div
+            key={product._id}
+            className="bg-white relative group rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition hover:border hover:border-blue-400"
+          >
 
-                  <div className="relative h-60 group">
-                    <Image
-                      src={product.imageCover}
-                      alt={product.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition"
-                    />
+            {/* ACTIONS (Client Component عادي) */}
+            <WishlistAddAction Id={product._id} />
 
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 flex flex-col gap-2">
-                      <AddWish Id={product._id} />
-                      <Link href={`/Shop/${product._id}`}>
-                        <button className="w-10 h-10 bg-white cursor-pointer rounded-full flex items-center justify-center shadow-md hover:bg-blue-50 hover:scale-110 transition group">
-                                <IoEyeOutline className="text-gray-600 text-xl group-hover:text-blue-400 transition" />
-                              </button>
-                      </Link>
-                    </div>
-                  </div>
+            {/* IMAGE */}
+            <div className="relative w-full h-60 overflow-hidden">
+              <Image
+                src={product.imageCover}
+                alt={product.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
 
-                  <div className="p-4">
-                    <p className="text-sm text-blue-500">
-                      {product.category.name}
-                    </p>
+            {/* CONTENT */}
+            <div className="p-4 flex flex-col gap-2">
 
-                    <h3 className="font-semibold line-clamp-2">
-                      {product.title}
-                    </h3>
-
-                    <div className="flex justify-between mt-4">
-                      <p className="font-bold">${product.price}</p>
-                      <AddProductToCart Id={product._id} />
-                    </div>
-                  </div>
-
+              {/* Rating */}
+              <div className="flex items-center gap-2">
+                <div className="flex text-yellow-400">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i}>
+                      {i < Math.round(product.ratingsAverage) ? '⭐' : '☆'}
+                    </span>
+                  ))}
                 </div>
+                <span className="text-sm text-gray-500">
+                  {product.ratingsAverage}
+                </span>
+              </div>
+
+              {/* Category */}
+              <p className="text-sm text-blue-400">
+                {product.category.name}
+              </p>
+
+              {/* Title */}
+              <p className="font-semibold line-clamp-2">
+                {product.title}
+              </p>
+
+              {/* Price */}
+              <div className="flex justify-between items-center mt-2">
+                <p className="font-bold text-lg">
+                  ${product.price}
+                </p>
+
+               <AddProductToCart Id={product._id}/>
+              </div>
+
+            </div>
+          </div>
               ))}
 
             </div>

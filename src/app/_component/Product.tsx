@@ -10,7 +10,7 @@ import { IoMdCart } from 'react-icons/io'
 import { AddCart } from '@src/CartAction/CartAction'
 import AddProductToCart from './AddProductToCart'
 export const dynamic = "force-dynamic";
-export default async function ProductClient() {
+export default async function Product() {
   const products: product[] = await getProducts()
 
 

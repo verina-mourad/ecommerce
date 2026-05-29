@@ -59,7 +59,7 @@ if (!product) {
     />
   </div>
 )}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
   {product?.images?.map((img: string, i: number) => (
     <div
       key={i}
