@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 import { FaArrowRight, FaCircle, FaLongArrowAltLeft } from 'react-icons/fa'
 import { GoFileSubmodule } from 'react-icons/go'
 
@@ -8,11 +7,13 @@ export const dynamic = 'force-dynamic'
 export default async function Page({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string, name: string }>
 }) {
 
-  const { id } = params
+  const { id, name } = await params
 
+  console.log(id);
+  console.log(name);
   // subcategories
   const res = await fetch(
     `https://ecommerce.routemisr.com/api/v1/categories/${id}/subcategories`,
@@ -77,21 +78,21 @@ export default async function Page({
 
         {categoryDetails.map((sub: any) => (
 
-         
 
-            <div className='bg-gray-100 rounded-2xl p-4 flex flex-col items-center gap-3 hover:shadow-lg transition'>
 
-              <GoFileSubmodule className='text-5xl text-blue-400' />
+          <div key={sub._id} className='bg-gray-100 rounded-2xl p-4 flex flex-col items-center gap-3 hover:shadow-lg transition'>
 
-              <p className='font-bold'>
-                {sub.name}
-              </p>
+            <GoFileSubmodule className='text-5xl text-blue-400' />
 
-              <p className='text-gray-400 text-xs flex items-center gap-1'>
-                VIEW PRODUCTS <FaArrowRight />
-              </p>
+            <p className='font-bold'>
+              {sub.name}
+            </p>
 
-            </div>
+            <p className='text-gray-400 text-xs flex items-center gap-1'>
+              VIEW PRODUCTS <FaArrowRight />
+            </p>
+
+          </div>
 
 
         ))}

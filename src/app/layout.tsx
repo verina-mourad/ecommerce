@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { GiClothes } from "react-icons/gi";
 import Navbar from "./_component/Navbar";
 import { LoadingProvider } from "@src/Context/Loading";
 import Useprovider from "@src/Useprovider";
@@ -9,7 +8,7 @@ import { Toaster } from "sonner";
 import { CountProvider } from "@src/Context/Count";
 import { CartCountProvider } from "@src/Context/CountCart";
 import { OrderContextProvider } from "@src/Context/Order";
-import { AddAdress, AddAdressProvider } from "@src/Context/AddAddress";
+import {  AddAdressProvider } from "@src/Context/AddAddress";
 import { LogoutContextProvider } from "@src/Context/LogoutContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",

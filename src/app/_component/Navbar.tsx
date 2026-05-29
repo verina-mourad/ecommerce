@@ -76,6 +76,7 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
   }
 }
   return (
+    <>
 <header className="w-full bg-white shadow-2xl relative z-[9999]">      {/* TOP BAR */}
      <div className='bg-gray-200 hidden md:flex '>
          <div className=" container mx-auto px-4 flex flex-col md:flex-row justify-between items-center  px-4 py-2 text-sm gap-2 md:grid md:grid-cols-6">
@@ -110,7 +111,50 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
 
      </div>
       {/* MAIN NAVBAR */}
-<div className="bg-white shadow-2xl w-full sticky  top-0 ">
+
+    {open && 
+    <div className='fixed inset-0 z-50'>
+        <div
+            className="absolute inset-0 bg-blue-400/20"
+            onClick={() => setopen(false)}
+            />
+        <div className='relative w-2/3 md:w-1/3 h-full bg-white p-4 flex flex-col gap-4'>
+        <div className='flex justify-between'>
+             <div className='flex items-center '>
+                <BsCart4 className='size-6 text-blue-400 p-1' />
+                <span>FarMart</span>
+            </div>
+            <div onClick={()=>setopen(false)} className='cursor-pointer'><IoCloseOutline /></div>
+        </div>
+             <div className="relative w-full">
+
+               <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={handleSearch}
+              />
+
+                <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" />
+
+            </div>
+        <Link href="/" >Home</Link>
+        <Link href="/Shop" >Shop</Link>
+        <Link href="/brand" >Brands</Link>
+        <p className='text-sm text-gray-500'>Categories</p>
+        <Link href="/Categories" >Allcategories</Link>
+        <Link href={`/SubCategories/${musiccategory?._id}`} >Music</Link>
+        <Link href="/SubCategories/${MensFashion?._id}" >Men'sFashion</Link>
+        <Link href={`/SubCategories/${WomensFashion?._id}`} >Women'sFashion</Link>
+        <Link href={`/SubCategories/${SuperMarket?._id}`} >SuperMarket</Link>
+        {status==='authenticated'? <Button className='bg-red-500 text-white rounded-xl shadow-2xl w-full'><Link href='/Logout'>Logout</Link></Button>  : <div className='flex gap-2'>
+            <Button onClick={()=>(setopen(false))} className='bg-gray-100 text-black rounded-xl shadow-2xl w-1/2' ><Link href='/sign-in'>Sign In</Link></Button>
+            <Button onClick={()=>(setopen(false))}  className='bg-blue-400 text-white rounded-xl shadow-2xl w-1/2'><Link href='/sign-up'>Sign Up</Link></Button>
+        </div>}
+    </div> 
+    </div> 
+      }
+    </header>
+    <div className="bg-white shadow-2xl w-full sticky  top-0 ">
 
   <div className="container mx-auto px-4  grid grid-cols-12 items-center py-3 gap-4">
 
@@ -233,48 +277,7 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
   </div>
 
 </div>
-    {open && 
-    <div className='fixed inset-0 z-50'>
-        <div
-            className="absolute inset-0 bg-blue-400/20"
-            onClick={() => setopen(false)}
-            />
-        <div className='relative w-2/3 md:w-1/3 h-full bg-white p-4 flex flex-col gap-4'>
-        <div className='flex justify-between'>
-             <div className='flex items-center '>
-                <BsCart4 className='size-6 text-blue-400 p-1' />
-                <span>FarMart</span>
-            </div>
-            <div onClick={()=>setopen(false)} className='cursor-pointer'><IoCloseOutline /></div>
-        </div>
-             <div className="relative w-full">
-
-               <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyDown={handleSearch}
-              />
-
-                <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" />
-
-            </div>
-        <Link href="/" >Home</Link>
-        <Link href="/Shop" >Shop</Link>
-        <Link href="/brand" >Brands</Link>
-        <p className='text-sm text-gray-500'>Categories</p>
-        <Link href="/Categories" >Allcategories</Link>
-        <Link href={`/SubCategories/${musiccategory?._id}`} >Music</Link>
-        <Link href="/SubCategories/${MensFashion?._id}" >Men'sFashion</Link>
-        <Link href={`/SubCategories/${WomensFashion?._id}`} >Women'sFashion</Link>
-        <Link href={`/SubCategories/${SuperMarket?._id}`} >SuperMarket</Link>
-        {status==='authenticated'? <Button className='bg-red-500 text-white rounded-xl shadow-2xl w-full'><Link href='/Logout'>Logout</Link></Button>  : <div className='flex gap-2'>
-            <Button onClick={()=>(setopen(false))} className='bg-gray-100 text-black rounded-xl shadow-2xl w-1/2' ><Link href='/sign-in'>Sign In</Link></Button>
-            <Button onClick={()=>(setopen(false))}  className='bg-blue-400 text-white rounded-xl shadow-2xl w-1/2'><Link href='/sign-up'>Sign Up</Link></Button>
-        </div>}
-    </div> 
-    </div> 
-      }
-    </header>
+</>
   )
 }
 

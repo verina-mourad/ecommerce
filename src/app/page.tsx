@@ -1,14 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import Category from './_component/Category'
 import Product from './_component/Product'
 import Cartfruits from './_component/Cartfruits'
 import Cart from './_component/Cart'
+import CategoriesGrid from './_component/CategoriesGrid'
 
 export default function page() {
   return <>
- <div className=' bg-gray-100/50 '>
+ <div className='bg-gray-100/50 '>
    <div className='container mx-auto px-2 flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between'>
     <div className='flex flex-col gap-5 order-2 lg:order-1 lg:w-3/6'>
       <div className='bg-gray-100 w-fit p-2 rounded-2xl order-2 lg:order-1 shadow-2xl flex items-center gap-2'>
@@ -39,7 +38,7 @@ export default function page() {
   <div className="lg:w-5/6">
     <Image
       className="w-full md:w-[764.4px] rounded-2xl lg:w-[750px] h-[450px]"
-      src="/image (1).png"
+      src="/image(1).png"
       alt="shopping image"
       width={400}
       height={400}
@@ -53,7 +52,7 @@ export default function page() {
 </div>
   </div>
  </div>
- <Category/>
+ <CategoriesGrid/>
 <Cartfruits/>
  <Product/>
  <Cart/>

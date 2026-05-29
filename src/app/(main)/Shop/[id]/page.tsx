@@ -126,7 +126,7 @@ useEffect(() => {
 
       {/* BUTTONS */}
       <div className='mt-4 flex gap-2'>
-        <AddSpecialProduct Id={product?._id}/>
+        <AddSpecialProduct Id={product!._id}/>
 
         <Link href={'/whishlist'}>
           <Button className='bg-white  py-2 border border-blue-300 border-2 text-black hover:text-red-400 hover:border-red-400'>

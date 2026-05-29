@@ -1,3 +1,5 @@
+'use client'
+
 import { getAddress } from '@src/api/Addresses';
 import { product } from '@src/types/dataaddresses';
 import React, { useEffect, useState } from 'react'

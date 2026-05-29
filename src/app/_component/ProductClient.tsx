@@ -56,7 +56,7 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
     setSelectedCategories((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     )
-  }
+  }         
 
   const handleBrandsChange = (id: string) => {
     setselectedbrands((prev) =>
@@ -135,14 +135,14 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
         </aside>
 
         {/* PRODUCTS (2/3) */}
-        <main className="w-[30%]">
+        <main className="w-full lg:w-[70%]">
             <div className='flex items-center gap-2 w-full'>
               <p>FILTERS:</p>
               <p>search:{query || search}</p>
               <Link href={'/Shop'} className='text-red-400 cursor-pointer bg-white'>CLEAR ALL</Link>
             </div>
           {hasProducts ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
               {filteredProducts.map((product) => (
                 <div

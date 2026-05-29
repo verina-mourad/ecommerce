@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext, useState } from 'react'
 import { AddWishlist } from '../WishlistAction/WishlistAction'
 import { CiHeart } from 'react-icons/ci'
