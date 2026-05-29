@@ -54,7 +54,7 @@ function page() {
   async function HandleLogin(value:RegisterType){
     setLoading(true)
     try{
-      const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/auth/signup`,{
+      const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,{
         method:'POST',
         body:JSON.stringify(value),
         headers:{'Content-Type': 'application/json'}

@@ -13,11 +13,11 @@ export default async function page({ params }: { params: Promise<{ id: string }>
   
   const { id } = await params
 
-  const brandRes = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/brands/${id}`)
+  const brandRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/brands/${id}`)
   const brandData: Welcome = await brandRes.json()
   const brand: Data = brandData.data
 
-  const productsRes = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/products`)
+  const productsRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/products`)
   const productsData = await productsRes.json()
 type Product = {
   _id: string

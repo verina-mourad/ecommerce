@@ -9,7 +9,7 @@ export async function AddCart(Id:string){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/cart`,{method:'POST',
+        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/cart`,{method:'POST',
             body:JSON.stringify({
                 productId:Id
             }),
@@ -33,7 +33,7 @@ export async function GetCart(){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/cart`,{method:'GET',
+        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/cart`,{method:'GET',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,
@@ -54,7 +54,7 @@ export async function UpdateCart(Id:string,count:number){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'put',
+        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'put',
                body:JSON.stringify({
                     count: count
                 }),
@@ -78,7 +78,7 @@ export async function RemoveCart(Id:string){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'Delete',
+        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'Delete',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,
@@ -99,7 +99,7 @@ export async function ClearCart(Id:string,count:number){
     throw new Error('token Error')
     }
     try{
-        const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'Delete',
+        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/cart/${Id}`,{method:'Delete',
             headers:{
                  'Content-Type': 'application/json',
                  token: token,

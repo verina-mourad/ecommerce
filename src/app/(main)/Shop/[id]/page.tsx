@@ -24,7 +24,7 @@ useEffect(() => {
   async function getspecificProduct() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/products/${id}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/products/${id}`
       )
       const data = await res.json()
       setProduct(data.data)

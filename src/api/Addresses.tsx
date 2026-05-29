@@ -18,7 +18,7 @@ export  async function addAddress(value: AddressInput) {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/addresses`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/addresses`,
       {
         method: 'POST',
         body: JSON.stringify({
@@ -54,7 +54,7 @@ export async function getAddress(){
     throw new Error('token Error')
    }
    try{
-    const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/addresses`,{
+    const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/addresses`,{
       headers:{
           'Content-Type': 'application/json',
           token:token,
@@ -79,7 +79,7 @@ export async function DeleteAddress(ID:string) {
     throw new Error('token Error')
    }
    try{
-    const res=await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/addresses/${ID}`,{method:'delete',
+    const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/addresses/${ID}`,{method:'delete',
       headers:{
           'Content-Type': 'application/json',
           token:token,

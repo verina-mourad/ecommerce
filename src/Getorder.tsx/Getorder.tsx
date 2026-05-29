@@ -12,7 +12,7 @@ export async function CheckOutSession(
   // URL fallback لو env مش موجودة
 
   const res = await fetch(
-    `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/orders/checkout-session/${Id}?url=http://localhost:3000`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/orders/checkout-session/${Id}?url=http://localhost:3000`,
     {
       method: "POST",
       body: JSON.stringify({shippingAddress}),
@@ -35,7 +35,7 @@ export async function CashOrder(
   if (!token) throw new Error("User token not found");
 
   const res = await fetch(
-    `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/orders/${Id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/orders/${Id}`,
     {
       method: "POST",
       body: JSON.stringify({shippingAddress}),
@@ -56,7 +56,7 @@ export default async function GetOrder() {
     if (!token){
         throw new Error('User token not found')
     }
- const res= await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/orders`, {
+ const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/orders`, {
     headers: {
         token:token
     }

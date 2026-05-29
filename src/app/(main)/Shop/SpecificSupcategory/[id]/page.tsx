@@ -8,7 +8,7 @@ export default async function Page({
   const { id } = params
 
   const res = await fetch(
-    `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/categories/${id}/subcategories`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/categories/${id}/subcategories`,
     {
       cache: 'no-store',
     }

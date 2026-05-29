@@ -46,7 +46,7 @@ const { loading, setLoading } = context
   async function handleResetPassword(value: RegisterType) {
     setLoading(true)
   try {
-    const res = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/auth/resetPassword`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/resetPassword`, {
       method: "PUT",
       body: JSON.stringify(value),
       headers: { "Content-Type": "application/json" },
