@@ -70,9 +70,9 @@ async function handleResendCode() {
     const res = await resendResetCodeAPI(email )
 
     if (res.status === "Success") {
-      toast.success("Code resent successfully 📩")
+      toast.success("Code resent successfully 📩",{position:'top-center'})
     } else {
-      toast.error(res.message || "Failed to resend code")
+      toast.error(res.message || "Failed to resend code",{position:'top-center'})
     }
 
   } catch {
