@@ -262,7 +262,7 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
      :
       <Link
         href="/sign-in"
-        className="hidden md:block flex items-center gap-1 bg-white text-white px-4 py-1 rounded-xl"
+        className="hidden md:block flex items-center gap-1 bg-bue-400 text-white px-4 py-1 rounded-xl"
         >
         <MdOutlinePerson />
         <span className="hidden sm:block">Sign In</span>
