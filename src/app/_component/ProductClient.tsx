@@ -12,6 +12,7 @@ import { IoSearch, IoEyeOutline, IoCloseOutline } from 'react-icons/io5'
 import AddProductToCart from './AddProductToCart'
 import Link from 'next/link'
 import AddWish from './AddWish'
+import { FaTrashAlt } from 'react-icons/fa'
 
 type Props = {
   products: any[]
@@ -93,7 +94,7 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
       <div className="flex w-full gap-8 ">
 
         {/* FILTERS (1/3) */}
-        <aside className="hidden lg:block lg:w-[30%]">
+        <aside className="hidden lg:block w-full lg:w-[25%]">
           <div className="border rounded-2xl p-5 bg-white shadow-sm sticky top-5 w-full">
 
             <h2 className="flex items-center gap-2 mb-5 text-lg font-semibold">
@@ -135,11 +136,11 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
         </aside>
 
         {/* PRODUCTS (2/3) */}
-        <main className="w-full lg:w-[70%]">
-            <div className='flex items-center gap-2 w-full'>
+          <main className="w-full lg:w-[75%] min-w-0 ">
+              <div className='flex items-center gap-2 w-full'>
               <p>FILTERS:</p>
               <p>search:{query || search}</p>
-              <Link href={'/Shop'} className='text-red-400 cursor-pointer bg-white'>CLEAR ALL</Link>
+              <Link href={'/Shop'} className='text-red-400 cursor-pointer bg-white'><FaTrashAlt /></Link>
             </div>
           {hasProducts ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -161,9 +162,9 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
                     <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 flex flex-col gap-2">
                       <AddWish Id={product._id} />
                       <Link href={`/Shop/${product._id}`}>
-                        <button className="bg-white p-2 rounded-full shadow">
-                          <IoEyeOutline />
-                        </button>
+                        <button className="w-10 h-10 bg-white cursor-pointer rounded-full flex items-center justify-center shadow-md hover:bg-blue-50 hover:scale-110 transition group">
+                                <IoEyeOutline className="text-gray-600 text-xl group-hover:text-blue-400 transition" />
+                              </button>
                       </Link>
                     </div>
                   </div>

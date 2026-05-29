@@ -32,7 +32,8 @@ const page = () => {
       onClick={() => data.setopen(false)}
     />
     <div className='fixed inset-0 flex items-center justify-center z-50'>
-<div className='bg-white w-1/2 h-1/2 p-2 rounded-xl'>        <div className='flex flex-col items-center gap-3'>
+    <div className='bg-white rounded-xl p-8'>      
+    <div className='flex flex-col items-center gap-3'>
     <BiErrorCircle className='size-9'/>
           <p className='font-bold text-blue-400'>Are you sure?</p>
 

@@ -1,5 +1,5 @@
 export async function getCategories() {
-  const res = await fetch('https://ecommerce.routemisr.com/api/v1/categories')
+  const res = await fetch('${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/categories')
 
   if (!res.ok) {
     throw new Error('Failed to fetch')
@@ -7,4 +7,4 @@ export async function getCategories() {
 
   const data = await res.json()
   return data.data
-}
+} 

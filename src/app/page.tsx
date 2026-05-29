@@ -2,8 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Product from './_component/Product'
 import Cartfruits from './_component/Cartfruits'
-import Cart from './_component/Cart'
 import CategoriesGrid from './_component/CategoriesGrid'
+import Footer from './_component/Footer'
 
 export default function page() {
   return <>
@@ -35,16 +35,16 @@ export default function page() {
     </div>
     
 <div className="relative z-0 hidden md:block md:w-full lg:w-auto md:p-5 lg:p-1 md:order-1 lg:order-2 lg:order-1">
-  <div className="lg:w-5/6">
+  <div>
     <Image
       className="w-full md:w-[764.4px] rounded-2xl lg:w-[750px] h-[450px]"
-      src="/image(1).png"
+      src="/image (1).png"
       alt="shopping image"
       width={400}
       height={400}
     />
 
-  <div className='bg-gray-100 shadow-2xl rounded-full w-fit p-1 absolute top-0 z-100 -right-4 '>
+  <div className='bg-gray-100 shadow-2xl rounded-full w-fit p-1 absolute top-0 z-100 -right-4  '>
     <p className='text-white bg-blue-400 rounded-full rotate-20 p-3'>SAVE <br /> <span className='font-bold'>20%</span></p>
   </div>
   </div>
@@ -55,6 +55,6 @@ export default function page() {
  <CategoriesGrid/>
 <Cartfruits/>
  <Product/>
- <Cart/>
+ <Footer/>
   </>
 }

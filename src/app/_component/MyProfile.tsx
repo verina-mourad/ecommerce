@@ -26,7 +26,7 @@ export function MyProfile() {
   const{data,status}=useSession()
 
   return (
-    <DropdownMenu>
+  <DropdownMenu>
       
       {/* ✅ Trigger الصح */}
       <DropdownMenuTrigger asChild>
@@ -37,105 +37,96 @@ export function MyProfile() {
 
       {/* ✅ Content */}
       <DropdownMenuContent
-        className="w-48 z-[9999]"
+        className="w-48 z-[9999] bg-white"
         align="end"
         sideOffset={5}
       >
 
         <DropdownMenuGroup >
           <DropdownMenuItem onClick={() => router.push('/MyAccount')}>
-          <div className="flex flex-row gap-2 w-fit">
-          <div className="bg-blue-200 rounded-full border-2 border-white w-10 h-10 flex items-center justify-center">
-            <MdOutlinePersonOutline className="text-blue-400 size-6" />
-          </div>         
-          <div className="flex flex-col">
-              <p className="font-bold">{data?.user.name}</p>
-              <p className="text-gray-400">{data?.user.email}</p>
-            </div>
-          </div>
+              <div className="flex flex-row gap-2 w-fit">
+              <div className="bg-blue-200 rounded-full border-2 border-white w-10 h-10 flex items-center justify-center">
+                <MdOutlinePersonOutline className="text-blue-400 size-6" />
+              </div>         
+              <div className="flex flex-col">
+                  <p className="font-bold">{data?.user.name}</p>
+                  <p className="text-gray-400">{data?.user.email}</p>
+                </div>
+              </div>
           </DropdownMenuItem>
-        
+      
 
+        <DropdownMenuItem onClick={() => router.push('/MyAccount')}>
+                  <div className="flex items-center gap-3 w-full">
+                    
+                    {/* نفس عرض الدائرة فوق */}
+                    <div className="icon-circle">
+                    <MdOutlinePersonOutline className="size-5 text-gray-600" />
+                    </div>
 
-            <DropdownMenuItem onClick={() => router.push('/MyAccount')}>
-   <div className="flex items-center gap-3 w-full">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle">
-    <MdOutlinePersonOutline className="size-5 text-gray-600" />
-    </div>
-
-    <span>My Profile</span>
-  </div>
-            </DropdownMenuItem>
+                    <span className="cursor-pointer">My Profile</span>
+                  </div>
+         </DropdownMenuItem>
          <DropdownMenuItem onClick={() => router.push('/getAllOrders')}>
-  <div className="flex items-center gap-3 w-full">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle">
-      <FaBoxArchive className="icon-container" />
-    </div>
+                <div className="flex items-center gap-3 w-full">
+                  
+                  <div className="icon-circle">
+                    <FaBoxArchive className="icon-container" />
+                  </div>
 
-    <span>My Orders</span>
-  </div>
-</DropdownMenuItem>
+                  <span className="cursor-pointer">My Orders</span>
+                </div>
+          </DropdownMenuItem>
 
-<DropdownMenuItem onClick={() => router.push('/whishlist')}>
-   <div className="flex items-center gap-3 w-ful cursor-pointer">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle">
-    <FaRegHeart className="size-5 text-gray-600" />
-    </div>
+          <DropdownMenuItem onClick={() => router.push('/whishlist')}>
+                <div className="flex items-center gap-3 w-ful cursor-pointer">
+                  
+                  <div className="icon-circle">
+                  <FaRegHeart className="size-5 text-gray-600" />
+                  </div>
 
-    <span>My Wishlist</span>
-  </div>
+                  <span className="cursor-pointer">My Wishlist</span>
+                </div>
 
-</DropdownMenuItem>
+          </DropdownMenuItem>
 
-<DropdownMenuItem onClick={() => router.push('/MyAccount/Addresses')}>
-   <div className="flex items-center gap-3 w-full cursor-pointer">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle"> 
-    <TbAddressBook className="size-5 text-gray-600" />
-    </div>
+    <DropdownMenuItem onClick={() => router.push('/MyAccount/Addresses')}>
+          <div className="flex items-center gap-3 w-full cursor-pointer">
+            
+            {/* نفس عرض الدائرة فوق */}
+            <div className="icon-circle"> 
+            <TbAddressBook className="size-5 text-gray-600" />
+            </div>
 
-    <span>Addresses</span>
-  </div>
-</DropdownMenuItem>
+            <span className="cursor-pointer">Addresses</span>
+          </div>
+    </DropdownMenuItem>
 
-<DropdownMenuItem onClick={() => router.push('/MyAccount/Password')}>
-   <div className="flex items-center gap-3 w-full cursor-pointer">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle">
-    <IoSettingsOutline className="size-5 text-gray-600 cursor-pointer" />
-    </div>
-
-    <span>Settings</span>
-  </div>
-</DropdownMenuItem>
+      <DropdownMenuItem onClick={() => router.push('/MyAccount/Password')}>
+             <div className="flex items-center gap-3 w-full cursor-pointer">      
+              <div className="icon-circle">
+              <IoSettingsOutline className="size-5 text-gray-600 cursor-pointer" />
+              </div>
+              <span className="cursor-pointer">Settings</span>
+              </div>
+      </DropdownMenuItem>
         </DropdownMenuGroup>
-
         <DropdownMenuSeparator />
-
        <DropdownMenuItem
-  className="text-red-600"
-  onClick={() => signOut({ callbackUrl: "/sign-in" })}
->
-   <div className="flex items-center gap-3 w-full cursor-pointer">
-    
-    {/* نفس عرض الدائرة فوق */}
-    <div className="icon-circle">
-    <BsBoxArrowLeft className="size-5" />
-    </div>
+          className="text-red-600"
+          onClick={() => signOut({ callbackUrl: "/sign-in" })}
+        >
+           <div className="flex items-center gap-3 w-full cursor-pointer">
+            
+            <div className="icon-circle">
+            <BsBoxArrowLeft className="size-5" />
+            </div>
 
-    <span>Sign out</span>
-  </div>
-</DropdownMenuItem>
+            <span>Sign out</span>
+          </div>
+        </DropdownMenuItem>
       </DropdownMenuContent>
 
-    </DropdownMenu>
+  </DropdownMenu>
   )
 }

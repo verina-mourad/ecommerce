@@ -6,6 +6,7 @@ import { AddWishlist } from '../WishlistAction/WishlistAction'
 import { FaHeart } from 'react-icons/fa'
 import { Count } from '@src/Context/Count'
 import { ImSpinner9 } from "react-icons/im";
+import Link from 'next/link'
 
 
 const WishlistAddAction = ({ Id }: { Id: string }) => {
@@ -42,9 +43,12 @@ const WishlistAddAction = ({ Id }: { Id: string }) => {
       </button>
 
       {/* EYE */}
-      <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-blue-400 hover:scale-110 transition group">
+     <Link href={`/Shop/${Id}`}>
+      <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-blue-50 cursor-pointer hover:scale-110 transition group">
         <IoEyeOutline className="text-gray-600 text-xl group-hover:text-blue-400 transition" />
       </button>
+     </Link>
+
 
     </div>
   )

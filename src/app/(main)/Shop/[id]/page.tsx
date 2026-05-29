@@ -24,7 +24,7 @@ useEffect(() => {
   async function getspecificProduct() {
     try {
       const res = await fetch(
-        `https://ecommerce.routemisr.com/api/v1/products/${id}`
+        `${process.env.NEXT_PUPLIC_BASE_URL}/api/v1/products/${id}`
       )
       const data = await res.json()
       setProduct(data.data)
@@ -36,7 +36,9 @@ useEffect(() => {
   useEffect(() => {
     if (id) getspecificProduct()
   }, [id])
-
+if (!product) {
+  return <div className="container mx-auto">Loading...</div>
+}
   return <>
      <div className='container mx-auto'>
        <Link href={'/Shop'} className=' flex items-center gap-2 cursor-pointer '>
@@ -46,7 +48,7 @@ useEffect(() => {
 
       <div className='bg-white p-4 lg:flex items-center justify-center'>
         {/*images*/}
-      <div className='space-y-4' >
+      <div className='space-y-4 mx-8' >
  {mainImage && (
   <div className="w-24 h-24 mx-auto relative overflow-hidden rounded-full">
     <Image

@@ -75,7 +75,7 @@ async function UpdateProductCount(Id: string, count: number) {
      
      setcarts(data.data)
    }catch(error:any){
-      toast.error(error?.message || 'Something went wrong')
+      toast.error(error?.message || 'Something went wrong',{position:'top-center'})
     
    }finally{
         setloading(false)
@@ -101,78 +101,76 @@ const total=subtotal? subtotal+shipping+tax:0
       <Loading />
     </div>
   )}   
-    {!carts || carts.products.length === 0 ? (
+  {!carts || carts.products.length === 0 ? (
       <CartEmpty />
-    ) : <>
+      ) : <>
      <div className='bg-blue-50/70 m-4'>
-   <header className='m-4'>
+    <header className='m-4'>
     <div className='flex items-center gap-2'>
-      <div className='bg-blue-400 p-3 rounded-xl'>
-      <IoMdCart  className='text-white'/>
+  <div className='bg-blue-400 p-3 rounded-xl'>
+      <IoMdCart className='text-white'/>
     </div>
-   <div className='flex flex-col'>
-     <div className='font-bold'>SHOPPING <span className='text-blue-400'> CART</span></div>
-    <div>You have <span className='text-blue-400'>{CountCart?.countCart} items</span> in your container</div>
+  <div className='flex flex-col'>
+      <div className='font-bold'>SHOPPING <span className='text-blue-400'> CART</span></div>
+  <div>You have <span className='text-blue-400'>{CountCart?.countCart} items</span> in your container</div>
    </div>
     </div>
    </header>
    {carts?.products.map((product)=>(
     <div key={product._id} className='flex justify-between bg-white items-center m-4 hover:shadow-2xl hover:border border-blue-300 rounded-2xl p-3'>
-     <div className='flex items-center gap-2'>
-      <div>
-      <Image src={product.product.imageCover} alt={product.product.title} width={100} height={100}/>
-      </div>
-      <div className='flex flex-col'>
-       <p>
-  {product.product.title.split(' ').slice(0,2).join(' ')}
-</p>
-        <p>{product.product.category.name}</p>
-        <p><span className='text-2xl text-blue-400 font-bold'>{product.price}</span> per unit</p>
-          <div className='bg-white p-1'>
-            <div className='flex items-center gap-1'>
-            <Button disabled={loading} className='cursor-pointer size-6 bg-blue-400'  onClick={()=>UpdateProductCount(product.product._id,product.count - 1)} >{product.count ===1?<FaTrashAlt/>:<IoIosRemoveCircle/>}</Button>          
-            {loading? <FaSpinner  className='animate-spin' />: product.count}
-            <Button disabled={loading}  className='cursor-pointer size-6 bg-blue-400' onClick={()=>UpdateProductCount(product.product._id,product.count +1)} ><IoAddCircle/></Button>          
-            
+      <div className='flex items-center gap-2'>
+          <div>
+            <Image src={product.product.imageCover} alt={product.product.title} width={100} height={100}/>
           </div>
-          </div>
+        <div className='flex flex-col'>
+          <p>
+            {product.product.title.split(' ').slice(0,2).join(' ')}
+          </p>
+          <p>{product.product.category.name}</p>
+          <p><span className='text-2xl text-blue-400 font-bold'>{product.price}</span> per unit</p>
+            <div className='bg-white p-1'>
+              <div className='flex items-center gap-1'>
+                <Button disabled={loading} className='cursor-pointer size-6 bg-blue-400'  onClick={()=>UpdateProductCount(product.product._id,product.count - 1)} >{product.count ===1?<FaTrashAlt/>:<IoIosRemoveCircle/>}</Button>          
+                {loading? <FaSpinner  className='animate-spin' />: product.count}
+                <Button disabled={loading}  className='cursor-pointer size-6 bg-blue-400' onClick={()=>UpdateProductCount(product.product._id,product.count +1)} ><IoAddCircle/></Button>               
+              </div>
+            </div>
+        </div>
       </div>
-    </div>
     <div className='flex items-center gap-1'>
-      <p  className='font-bold'>{product.price * product.count} <span className='text-sm'>EGP</span></p>
-      <Button disabled={loading} onClick={()=>DeleteProduct(product._id)} className='font-bold bg-red-100 p-2 rounded-2xl cursor-pointer'><FaRegTrashAlt className='text-red-400 mx-auto'/></Button>
+        <p  className='font-bold'>{product.price * product.count} <span className='text-sm'>EGP</span></p>
+        <Button disabled={loading} onClick={()=>DeleteProduct(product._id)} className='font-bold bg-red-100 p-2 rounded-2xl cursor-pointer'><FaRegTrashAlt className='text-red-400 mx-auto'/></Button>
     </div>
-   </div>
-   ))}
+    </div>
+      ))}
    <div>
-    <h2>ORDER <span className='text-blue-400'>SUMMARY</span>
-    </h2>
-    <div className='flex items-center justify-between'>
-      <p className='text-gray-400'>SUBTOTAL</p>
-      <p className='text-black font-bold'>{subtotal}</p>
+      <h2>ORDER <span className='text-blue-400'>SUMMARY</span>
+      </h2>
+      <div className='flex items-center justify-between'>
+        <p className='text-gray-400'>SUBTOTAL</p>
+        <p className='text-black font-bold'>{subtotal}</p>
+      </div>
+      <div className='flex items-center justify-between'>
+        <p className='text-gray-400'>SHIPPING</p>
+        <p className='text-black font-bold'>{shipping}<span className='text-xs'>EGP</span></p>
+      </div>
+      <div className='flex items-center justify-between'>
+        <p className='text-gray-400'>ESTIMATED TAX</p>
+        <p className='text-black font-bold'>14 <span className='text-xs'>EGP</span></p>
+      </div>
+      <div className='border-1 border-blue-100 m-2'/>
+      <p className='mt-3 text-sm'>TOTAL AMOUNT <span className='text-sm text-black'>EGP</span></p>
+      <p className='text-2xl text-blue-400 font-bold'>{total} <span className='text-sm text-black'>EGP</span></p>
+      <p className='text-xs m-1'>HAVE A PROMO CODE?</p>
+      <div>
+        <Input placeholder='Enter code relative'/>
+        <Button className='bg-black absolute right-4 cursor-pointer text-white p-2 rounded-xl'>Apply</Button>
+      </div>
+      {carts._id &&  <Link href={`/CheckOutSession/${carts?._id}`}>
+      <Button className='bg-blue-400 hover:bg-blue-500 text-white cursor-pointer w-full p-5 m-4'>PROCEED TO CHECKOUT <FaLongArrowAltRight className='text-white'/></Button>
+      </Link>}
+      <link href='/' className='flex items-center text-xs hover:text-blue-400 flex items-center justify-center'><MdKeyboardArrowLeft /> BACK TO SHOPPING</link>
     </div>
-    <div className='flex items-center justify-between'>
-      <p className='text-gray-400'>SHIPPING</p>
-      <p className='text-black font-bold'>{shipping}<span className='text-xs'>EGP</span></p>
-    </div>
-    <div className='flex items-center justify-between'>
-      <p className='text-gray-400'>ESTIMATED TAX</p>
-      <p className='text-black font-bold'>14 <span className='text-xs'>EGP</span></p>
-    </div>
-    <div className='border-1 border-blue-100 m-2'/>
-    <p className='mt-3 text-sm'>TOTAL AMOUNT <span className='text-sm text-black'>EGP</span></p>
-    <p className='text-2xl text-blue-400 font-bold'>{total} <span className='text-sm text-black'>EGP</span></p>
-    <p className='text-xs m-1'>HAVE A PROMO CODE?</p>
-    <div>
-    <Input placeholder='Enter code relative'/>
-    <Button className='bg-black absolute right-4 cursor-pointer text-white p-2 rounded-xl'>Apply</Button>
-    </div>
-   {carts._id &&  <Link href={`/CheckOutSession/${carts?._id}`}>
-    <Button className='bg-blue-400 hover:bg-blue-500 text-white cursor-pointer w-full p-5 m-4'>PROCEED TO CHECKOUT <FaLongArrowAltRight className='text-white'/></Button>
-
-    </Link>}
-    <Link href='/' className='flex items-center text-xs hover:text-blue-400 flex items-center justify-center'><MdKeyboardArrowLeft /> BACK TO SHOPPING</Link>
-   </div>
  </div>
     </>
     }

@@ -38,11 +38,11 @@ const Navbar = () => {
     const Data=useContext(Count)
       const CountCart=useContext(CartCount)
 {/*sub category*/}
- const [categories, setCategories] = useState<Product[]>([])
-const musiccategory=categories.find((category)=>category.name==='Music');
-const WomensFashion=categories.find((category)=>category.name===`Women's Fashion`)
-const MensFashion=categories.find((category)=>category.name===`Men's Fashion`)
-const SuperMarket=categories.find((category)=>category.name===`SuperMarket`)
+    const [categories, setCategories] = useState<Product[]>([])
+    const musiccategory=categories.find((category)=>category.name==='Music');
+    const WomensFashion=categories.find((category)=>category.name===`Women's Fashion`)
+    const MensFashion=categories.find((category)=>category.name===`Men's Fashion`)
+    const SuperMarket=categories.find((category)=>category.name===`SuperMarket`)
   useEffect(() => {
     getCategories().then((data) => {
       setCategories(data)
@@ -77,8 +77,8 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
 }
   return (
     <>
-<header className="w-full bg-white shadow-2xl relative z-[9999]">      {/* TOP BAR */}
-     <div className='bg-gray-200 hidden md:flex '>
+<aside className="w-full bg-white shadow-2xl relative ">      
+     <div className='bg-gray-200 hidden md:flex'>
          <div className=" container mx-auto px-4 flex flex-col md:flex-row justify-between items-center  px-4 py-2 text-sm gap-2 md:grid md:grid-cols-6">
 
         <div className="flex gap-4 col-span-2">
@@ -113,20 +113,19 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
       {/* MAIN NAVBAR */}
 
     {open && 
-    <div className='fixed inset-0 z-50'>
+    <div className='fixed inset-0 z-[99999]'>
         <div
             className="absolute inset-0 bg-blue-400/20"
-            onClick={() => setopen(false)}
-            />
-        <div className='relative w-2/3 md:w-1/3 h-full bg-white p-4 flex flex-col gap-4'>
-        <div className='flex justify-between'>
+            onClick={() => setopen(false)}/>
+        <div className='relative w-2/3 md:w-1/3 h-full bg-white top-0 p-4 flex flex-col gap-4 '>
+          <div className='flex justify-between'>
              <div className='flex items-center '>
                 <BsCart4 className='size-6 text-blue-400 p-1' />
                 <span>FarMart</span>
-            </div>
+             </div>
             <div onClick={()=>setopen(false)} className='cursor-pointer'><IoCloseOutline /></div>
-        </div>
-             <div className="relative w-full">
+          </div>
+            <div className="relative w-full">
 
                <Input
                 value={search}
@@ -149,12 +148,13 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
         {status==='authenticated'? <Button className='bg-red-500 text-white rounded-xl shadow-2xl w-full'><Link href='/Logout'>Logout</Link></Button>  : <div className='flex gap-2'>
             <Button onClick={()=>(setopen(false))} className='bg-gray-100 text-black rounded-xl shadow-2xl w-1/2' ><Link href='/sign-in'>Sign In</Link></Button>
             <Button onClick={()=>(setopen(false))}  className='bg-blue-400 text-white rounded-xl shadow-2xl w-1/2'><Link href='/sign-up'>Sign Up</Link></Button>
-        </div>}
+        </div>
+        }
     </div> 
     </div> 
       }
-    </header>
-    <div className="bg-white shadow-2xl w-full sticky  top-0 ">
+    </aside>
+    <div className="bg-white shadow-2xl w-full sticky z-[999]  top-0 ">
 
   <div className="container mx-auto px-4  grid grid-cols-12 items-center py-3 gap-4">
 
@@ -190,7 +190,6 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
       </div>
     </div>
 
-    {/* 🔥 LINKS باستخدام shadcn (LG بس) */}
     <div className="hidden lg:flex col-span-3 items-center gap-4">
 
       <NavigationMenu>
@@ -208,31 +207,30 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
             </NavigationMenuLink>
           </NavigationMenuItem>
 
-          {/* DROPDOWN */}
-<NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>
-        Categories
-      </NavigationMenuTrigger>
-<NavigationMenuContent className="z-[99999] bg-white shadow-xl rounded-xl">
-  <div className="w-48 p-2 flex flex-col gap-2">
-    {categories.map((cat) => (
-      <NavigationMenuLink asChild key={cat._id}>
-        <Link
-          href={`/SubCategories/${cat._id}`}
-          className="block px-2 py-1 hover:bg-gray-100 rounded-md"
-        >
-          {cat.name}
-        </Link>
-      </NavigationMenuLink>
-    ))}
-  </div>
-</NavigationMenuContent>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>
-          <NavigationMenuItem>
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                  Categories
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white shadow-xl rounded-xl">
+                  <div className="w-48 p-2 flex flex-col gap-2">
+                      {categories.map((cat) => (
+                      <NavigationMenuLink asChild key={cat._id}>
+                          <Link
+                          href={`/Categories/${cat._id}`}
+                          className="block px-2 py-1 hover:bg-gray-100 rounded-md"
+                            >
+                          {cat.name}
+                            </Link>
+                      </NavigationMenuLink>
+                      ))}
+                    </div>
+                </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link href="/brand">Brands</Link>
             </NavigationMenuLink>
@@ -247,35 +245,31 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
     <div className="col-span-4 lg:col-span-2 flex justify-end items-center gap-4">
     
      <div className="relative"  onClick={handleWishlist}>
-      <FaRegHeart className="size-6 cursor-pointer" />
+        <FaRegHeart className="size-6 cursor-pointer" />
 
-      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-        {Data?.loading? <ImSpinner9 className='animate-spin' />: Data?.count}
-       </span>
+        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+          {Data?.loading? <ImSpinner9 className='animate-spin' />: Data?.count}
+        </span>
     </div>
-          <div className="relative" onClick={handlecart}>
-      <MdShoppingCart className="size-6 text-blue-400 cursor-pointer" />
-
-      <span className="absolute -top-2 -right-2 bg-blue-400 text-white text-xs px-1 rounded-full">
-{CountCart?.loading ? <ImSpinner9 className='animate-spin' /> : CountCart?.countCart}      </span>
-      </div>
-     {status==='authenticated'?<>
+    <div className="relative" onClick={handlecart}>
+          <MdShoppingCart className="size-6 text-blue-400 cursor-pointer" />
+          <span className="absolute -top-2 -right-2 bg-blue-400 text-white text-xs px-1 rounded-full">
+          {CountCart?.loading ? <ImSpinner9 className='animate-spin' /> : CountCart?.countCart}</span>
+    </div>
+      {status==='authenticated'?<>
       <MyProfile/>
      </>
      :
       <Link
         href="/sign-in"
-        className="hidden md:block flex items-center gap-1 bg-blue-400 text-white px-4 py-1 rounded-xl"
-      >
+        className="hidden md:block flex items-center gap-1 bg-white text-white px-4 py-1 rounded-xl"
+        >
         <MdOutlinePerson />
         <span className="hidden sm:block">Sign In</span>
       </Link>
 }
-
     </div>
-
   </div>
-
 </div>
 </>
   )

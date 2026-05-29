@@ -20,16 +20,16 @@ const CategoryLinks = () => {
       >
         HOME <MdArrowForwardIos />
       </Link>
+      <Link
+        href="/Categories"
+        className={`flex items-center gap-1 hover:text-blue-400 ${
+          path === '/Categories' ? 'text-blue-500 font-semibold' : ''
+        }`}
+      >
+          Categories
+      </Link>
 
-     {segments.map((seg,index)=>{
-      const href='/'+segments.slice(0,index+1).join('/')
-      return(
-        <Link href={href} key={href} className='flex items-center gap-1 hover:text-blue-400'>
-        {seg}
-        {index !== segments.length -1 && <MdArrowForwardIos/>}
-        </Link>
-      )
-     })}
+   
 
   
 

@@ -96,7 +96,7 @@ const UpdatePassword = () => {
         />
 
           <Button className='group overflow-hidden relative cursor-pointer p-6 mt-6 bg-blue-950 w-full' type="submit">
-            <span className='flex z-10 items-center gap-2'>
+            <span className='flex z-10 items-center gap-2 text-white'>
               <IoIosKey /> Update Password
             </span>
             <span className='absolute top-0 left-0 h-full w-0 bg-blue-400 transition-all duration-300 ease-in-out group-hover:w-full'></span>
