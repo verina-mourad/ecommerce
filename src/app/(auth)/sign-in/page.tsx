@@ -2,7 +2,7 @@
 import { Button } from '@src/components/ui/button'
 import { Input } from '@src/components/ui/input'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { FcGoogle } from 'react-icons/fc'
 import { RiFacebookCircleFill } from 'react-icons/ri'
@@ -16,7 +16,7 @@ import { signIn } from "next-auth/react"
 import Loading from '@src/app/loading'
 import { LoadingContext } from '@src/Context/Loading'
 function page() {
-
+  const [send, setsend] = useState(false)
   const context = useContext(LoadingContext)
 
   if (!context) throw new Error("LoadingContext missing")
@@ -48,6 +48,7 @@ password: z
   type RegisterType=z.infer<typeof SchemaSignIn>
   async function HandleLogin(value:RegisterType){
      (true)
+     setsend(true)
     const data =await signIn ('credentials',{
       email:value.email,
       password:value.password,
@@ -58,10 +59,11 @@ password: z
 if (data?.ok) {
   toast('login successfully',{position:'top-center'})
   router.push('/')
+  setsend(false)
   
 }else{
   toast.error(data?.error,{position:'top-center'})
-
+    setsend(false)
 }
     
   }
@@ -94,8 +96,8 @@ if (data?.ok) {
     <h2 className='text-gray-500'>please enter your details to sign in<span></span></h2>
     <p className='text-gray-300 text-center text-sm'>CONNECT WITH</p>
     <div className='flex  items-center justify-between'>
-    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl px-12 text-black cursor-pointer'><FcGoogle className='size-6'/> Google</Button>
-    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl px-12 text-black cursor-pointer'><RiFacebookCircleFill className='size-6 text-blue-800' /> Facebook</Button>
+    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl text-black cursor-pointer'><FcGoogle className='size-6'/> Google</Button>
+    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl text-black cursor-pointer'><RiFacebookCircleFill className='size-6 text-blue-800' /> Facebook</Button>
     </div>
         <Form {...signinform}>
       <form onSubmit={signinform.handleSubmit(HandleLogin)}>
@@ -129,7 +131,7 @@ if (data?.ok) {
             </FormItem>
           )}
         />
-<Button className="relative overflow-hidden p-6 cursor-pointer m-6 w-full bg-blue-950 text-white group">
+<Button disabled={send}  className="relative overflow-hidden p-6 mt-6 cursor-pointer  w-full bg-blue-950 text-white group">
   
   <span className="relative z-10 flex items-center gap-2 ">
     Sign In <FaArrowRightLong />

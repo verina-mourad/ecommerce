@@ -2,7 +2,7 @@
 import { Button } from '@src/components/ui/button'
 import { Input } from '@src/components/ui/input'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { FcGoogle } from 'react-icons/fc'
 import { RiFacebookCircleFill } from 'react-icons/ri'
@@ -16,7 +16,7 @@ import { LoadingContext } from '@src/Context/Loading'
 import Loading from '@src/app/loading'
 function page() {
   const context = useContext(LoadingContext)
-  
+    const [send, setsend] = useState(false)
   if (!context) throw new Error("LoadingContext missing")
   
   const { loading, setLoading } = context
@@ -53,6 +53,7 @@ function page() {
   type RegisterType=z.infer<typeof SchemaSignIn>
   async function HandleLogin(value:RegisterType){
     setLoading(true)
+    setsend(true)
     try{
       const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,{
         method:'POST',
@@ -63,9 +64,11 @@ function page() {
       if (res.status >= 200 && res.status < 300){
         toast.success('Registered successfully 🎉',{position:'top-center'})
         router.push('/sign-in')
+        setsend(false)
         }
         else{
         toast.error(data.message|| 'signup failed',{position:'top-center'})
+        setsend(false)
         }
     }
 
@@ -99,9 +102,9 @@ function page() {
     <h2 className='text-5xl font-bold mt-8'>create Account</h2>
     <h2 className='text-gray-500'>Already a member? <Link href='/sign-in' className='text-blue-400'>Log in</Link> <span></span></h2>
     <p className='text-gray-300 text-center text-sm'>SOCIAL SIGNUP</p>
-    <div className='flex  items-center justify-between'>
-    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl px-12 text-black cursor-pointer'><FcGoogle className='size-6'/> Google</Button>
-    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl px-12 text-black cursor-pointer'><RiFacebookCircleFill className='size-6 text-blue-800' /> Facebook</Button>
+    <div className='flex items-center justify-between'>
+    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl text-black cursor-pointer'><FcGoogle className='size-6'/> Google</Button>
+    <Button className='bg-gray-50 hover:bg-gray-100 shadow-2xl text-black cursor-pointer'><RiFacebookCircleFill className='size-6 text-blue-800' /> Facebook</Button>
     </div>
         <Form {...signinform}>
       <form onSubmit={signinform.handleSubmit(HandleLogin)}>
@@ -170,8 +173,8 @@ function page() {
             </FormItem>
           )}
         />
-          <Button className='group overflow-hidden relative cursor-pointer p-6 mt-6 bg-blue-950 w-full' type="submit">
-            <span className='flex z-10 items-center gap-2'>
+          <Button disabled={send} className='group overflow-hidden relative cursor-pointer p-6 mt-6 bg-blue-950 w-full' type="submit">
+            <span className='flex z-10 items-center gap-2 text-white'>
               Register <FaArrowRightLong />
             </span>
             <span className='absolute top-0 left-0 h-full w-0 bg-blue-400 transition-all duration-300 ease-in-out group-hover:w-full'></span>

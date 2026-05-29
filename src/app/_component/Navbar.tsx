@@ -33,12 +33,17 @@ import { ImSpinner9 } from 'react-icons/im'
 import { CartCount } from '@src/Context/CountCart'
 import { getCategories } from '@src/services/getcategories'
 import { Product } from '@src/types/SubCategories'
+import SearchInput from './SearchBar'
+import SecondryNavbar from './SecondryNavbar'
+import MobileMenu from './MenuMobile'
 const Navbar = () => {
   const{data,status}=useSession()
     const Data=useContext(Count)
       const CountCart=useContext(CartCount)
 {/*sub category*/}
     const [categories, setCategories] = useState<Product[]>([])
+    console.log(categories);
+    
     const musiccategory=categories.find((category)=>category.name==='Music');
     const WomensFashion=categories.find((category)=>category.name===`Women's Fashion`)
     const MensFashion=categories.find((category)=>category.name===`Men's Fashion`)
@@ -75,83 +80,32 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
     setSearch('')
   }
 }
+const submitSearch = () => {
+if (search.trim()) {
+  router.push(`/Shop?query=${search}`)
+  setSearch('')
+}
+}
   return (
     <>
 <aside className="w-full bg-white shadow-2xl relative ">      
-     <div className='bg-gray-200 hidden md:flex'>
-         <div className=" container mx-auto px-4 flex flex-col md:flex-row justify-between items-center  px-4 py-2 text-sm gap-2 md:grid md:grid-cols-6">
-
-        <div className="flex gap-4 col-span-2">
-          <p className="flex items-center gap-1 col-span-1 ">
-            <FaTractor className='text-blue-400 size-6' /> Free Shipping on orders 500 EGP+
-          </p>
-          <p className="flex items-center gap-1 col-span-1">
-            <FaGift className='text-blue-400 size-6' /> New Arrivals Daily
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-4 items-center col-span-4">
-          <p className="flex items-center gap-1 col-span-1">
-            <FaPhoneAlt /> +1(800) 123-4567
-          </p>
-
-          <p className="flex items-center gap-1 col-span-1">
-            <SlEnvolopeLetter /> support@farmart.com
-          </p>
-
-          <Link href="/sign-in" className="flex items-center gap-1 col-span-1">
-            <MdOutlinePerson className='size-5' /> Sign In
-          </Link>
-
-          <Link href="/sign-up" className="flex items-center gap-1 col-span-1">
-            <MdOutlinePerson className='size-5' /> Sign Up
-          </Link>
-        </div>,
-      </div>
-
-     </div>
+     <SecondryNavbar/>
       {/* MAIN NAVBAR */}
 
-    {open && 
-    <div className='fixed inset-0 z-[99999]'>
-        <div
-            className="absolute inset-0 bg-blue-400/20"
-            onClick={() => setopen(false)}/>
-        <div className='relative w-2/3 md:w-1/3 h-full bg-white top-0 p-4 flex flex-col gap-4 '>
-          <div className='flex justify-between'>
-             <div className='flex items-center '>
-                <BsCart4 className='size-6 text-blue-400 p-1' />
-                <span>FarMart</span>
-             </div>
-            <div onClick={()=>setopen(false)} className='cursor-pointer'><IoCloseOutline /></div>
-          </div>
-            <div className="relative w-full">
-
-               <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyDown={handleSearch}
-              />
-
-                <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" />
-
-            </div>
-        <Link href="/" >Home</Link>
-        <Link href="/Shop" >Shop</Link>
-        <Link href="/brand" >Brands</Link>
-        <p className='text-sm text-gray-500'>Categories</p>
-        <Link href="/Categories" >Allcategories</Link>
-        <Link href={`/SubCategories/${musiccategory?._id}`} >Music</Link>
-        <Link href="/SubCategories/${MensFashion?._id}" >Men'sFashion</Link>
-        <Link href={`/SubCategories/${WomensFashion?._id}`} >Women'sFashion</Link>
-        <Link href={`/SubCategories/${SuperMarket?._id}`} >SuperMarket</Link>
-        {status==='authenticated'? <Button className='bg-red-500 text-white rounded-xl shadow-2xl w-full'><Link href='/Logout'>Logout</Link></Button>  : <div className='flex gap-2'>
-            <Button onClick={()=>(setopen(false))} className='bg-gray-100 text-black rounded-xl shadow-2xl w-1/2' ><Link href='/sign-in'>Sign In</Link></Button>
-            <Button onClick={()=>(setopen(false))}  className='bg-blue-400 text-white rounded-xl shadow-2xl w-1/2'><Link href='/sign-up'>Sign Up</Link></Button>
-        </div>
-        }
-    </div> 
-    </div> 
+    {open &&   
+      <MobileMenu
+        open={open}
+        setopen={setopen}
+        search={search}
+        setSearch={setSearch}
+        submitSearch={submitSearch}
+        handleSearch={handleSearch}
+        status={status}
+        musiccategory={musiccategory}
+        MensFashion={MensFashion}
+        WomensFashion={WomensFashion}
+        SuperMarket={SuperMarket}
+      />
       }
     </aside>
     <div className="bg-white shadow-2xl w-full sticky z-[999]  top-0 ">
@@ -170,7 +124,7 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
  
     {/* LOGO */}
     <div className=" col-span-7 md:col-span-2 ">
-      <Link href="/" className="flex items-center gap-1 font-bold text-xl">
+      <Link href="/" className="flex items-center gap-1 px-2 font-bold text-xl">
         <BsCart4 className="text-blue-400 size-6" />
         Far<span className="text-blue-500">Mart</span>
       </Link>
@@ -178,16 +132,12 @@ function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
 
     {/* SEARCH */}
     <div className="hidden md:block md:col-span-5 ">
-      <div className="relative w-full"       >
-        <Input
-        value={search}
-        onChange={(e)=> setSearch(e.target.value)}
-        onKeyDown={handleSearch}
-          placeholder="Search for products..."
-          className="w-full pl-10 h-11"
-        />
-        <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" />
-      </div>
+  <SearchInput
+  search={search}
+  setSearch={setSearch}
+  submitSearch={submitSearch}
+  handleSearch={handleSearch}
+/>
     </div>
 
     <div className="hidden lg:flex col-span-3 items-center gap-4">

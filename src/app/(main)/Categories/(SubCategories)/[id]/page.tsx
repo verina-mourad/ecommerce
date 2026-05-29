@@ -58,7 +58,7 @@ export default async function Page({
       </Link>
 
       {/* header */}
-      <div className='flex items-center bg-gray-100 gap-2 shadow-2xl p-3 rounded'>
+      <div className='flex items-center bg-gray-100 gap-2 shadow-2xl rounded'>
 
         <FaCircle className='text-blue-400 animate-pulse' />
 

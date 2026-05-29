@@ -48,7 +48,7 @@ function page() {
         router.push('/verifycode')
         }
         else{
-        toast.error(data.message)
+        toast.error(data.message,{position:'top-center'})
         }
     }
 
@@ -113,10 +113,10 @@ function page() {
           )}
         />
    
-<Button className="relative overflow-hidden p-6 cursor-pointer m-6 w-full bg-blue-950 text-white group">
+<Button className="relative overflow-hidden p-6 cursor-pointer mt-6 w-full bg-blue-950 text-white group">
   
   <span className="relative z-10 flex items-center gap-2 ">
-    send Reset Link <FaLocationArrow />
+    send Reset code<FaLocationArrow />
   </span>
 
   <span className="absolute left-0 top-0 h-full w-0 bg-blue-400 transition-all duration-300 ease-in-out group-hover:w-full"></span>

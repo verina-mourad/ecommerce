@@ -42,10 +42,10 @@ export default function VerifyCodePage() {
       const res = await verifyResetCodeAPI(data)
 
       if (res.status === "Success") {
-        toast.success("Code verified 🎉")
+        toast.success("Code verified 🎉",{position:'top-center'})
         router.push("/UpdatePasword")
       } else {
-        toast.error(res.message)
+        toast.error(res.message,{position:'top-center'})
       }
 
     } catch {
@@ -175,7 +175,7 @@ return <>
             </div>
 
           {/* SUBMIT */}
-        <Button disabled={loading}  className="relative overflow-hidden p-6 cursor-pointer m-6 w-full bg-blue-950 text-white group">
+        <Button disabled={loading}  className="relative overflow-hidden p-6 cursor-pointer mt-6 w-full bg-blue-950 text-white group">
           
           <span className="relative z-10 flex items-center gap-2 ">
             Verify Code <CiLocationArrow1 className='text-white' />

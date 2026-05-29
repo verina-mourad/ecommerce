@@ -13,6 +13,7 @@ import AddProductToCart from './AddProductToCart'
 import Link from 'next/link'
 import AddWish from './AddWish'
 import { FaTrashAlt } from 'react-icons/fa'
+import FilterSideBar from './FilterSideBar'
 
 type Props = {
   products: any[]
@@ -58,6 +59,19 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     )
   }         
+  function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' && search.trim()) {
+      router.push(`/Shop?query=${search}`)
+  
+      setSearch('')
+    }
+  }
+  const submitSearch = () => {
+  if (search.trim()) {
+    router.push(`/Shop?query=${search}`)
+    setSearch('')
+  }
+  }
 
   const handleBrandsChange = (id: string) => {
     setselectedbrands((prev) =>
@@ -80,60 +94,40 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
       </div>
 
       {/* SEARCH */}
-      <div className="relative w-1/2 mb-6">
-        <Input
-          placeholder="Search..."
-          className="pl-10"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <IoSearch className="absolute left-3 top-2 text-blue-400" />
+       <div className="block md:hidden md:col-span-5 ">
+          <div className="relative w-full">
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={handleSearch}
+              placeholder="Search for products..."
+              className="w-full pl-10 h-11"
+            />
+      
+            <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" />
+      
+            <Button
+              onClick={submitSearch}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-400 text-white px-3"
+            >
+              Search
+            </Button>
       </div>
+          </div>
 
       {/* ✅ FIXED LAYOUT (IMPORTANT) */}
       <div className="flex w-full gap-8 ">
 
         {/* FILTERS (1/3) */}
-        <aside className="hidden lg:block w-full lg:w-[25%]">
-          <div className="border rounded-2xl p-5 bg-white shadow-sm sticky top-5 w-full">
-
-            <h2 className="flex items-center gap-2 mb-5 text-lg font-semibold">
-              <LiaFilterSolid />
-              Filters
-            </h2>
-
-            <p className="font-semibold mb-3">Categories</p>
-            <div className="space-y-2 mb-6">
-              {categories.map((cat: any) => (
-                <FieldGroup key={cat._id}>
-                  <Field orientation="horizontal">
-                    <Checkbox
-                      checked={selectedCategories.includes(cat._id)}
-                      onCheckedChange={() => handleCategoryChange(cat._id)}
-                    />
-                    <label className="text-sm">{cat.name}</label>
-                  </Field>
-                </FieldGroup>
-              ))}
-            </div>
-
-            <p className="font-semibold mb-3">Brands</p>
-            <div className="space-y-2 max-h-52 overflow-y-auto">
-              {Brands.map((brand: any) => (
-                <FieldGroup key={brand._id}>
-                  <Field orientation="horizontal">
-                    <Checkbox
-                      checked={selectedbrands.includes(brand._id)}
-                      onCheckedChange={() => handleBrandsChange(brand._id)}
-                    />
-                    <label className="text-sm">{brand.name}</label>
-                  </Field>
-                </FieldGroup>
-              ))}
-            </div>
-
-          </div>
-        </aside>
+        <div className='hidden lg:block w-full lg:w-[25%] sticky top-15 self-start'>        <FilterSideBar
+            categories={categories}
+            Brands={Brands}
+            selectedCategories={selectedCategories}
+            selectedbrands={selectedbrands}
+            handleCategoryChange={handleCategoryChange}
+            handleBrandsChange={handleBrandsChange}
+            />
+        </div>
 
         {/* PRODUCTS (2/3) */}
           <main className="w-full lg:w-[75%] min-w-0 ">
@@ -212,8 +206,19 @@ const ProductClient = ({ products, categories, Brands }: Props) => {
           />
           <div className="absolute left-0 top-0 w-2/3 h-full bg-white p-4">
             <IoCloseOutline onClick={() => setOpen(false)} />
+              <div className='lg:hidden w-full lg:w-[25%]'>
+              <FilterSideBar
+                    categories={categories}
+                    Brands={Brands}
+                    selectedCategories={selectedCategories}
+                    selectedbrands={selectedbrands}
+                    handleCategoryChange={handleCategoryChange}
+                    handleBrandsChange={handleBrandsChange}
+              />
+              </div>
           </div>
         </div>
+
       )}
 
     </div>
