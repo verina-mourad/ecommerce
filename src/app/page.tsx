@@ -4,7 +4,7 @@ import Product from './_component/Product'
 import Cartfruits from './_component/Cartfruits'
 import CategoriesGrid from './_component/CategoriesGrid'
 import Footer from './_component/Footer'
-
+export const dynamic = "force-dynamic";
 export default function page() {
   return <>
  <div className='bg-gray-100/50 '>
