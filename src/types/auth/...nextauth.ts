@@ -15,6 +15,7 @@ declare module "next-auth" {
   
   interface Session{
     user:User['user']
+    accessToken:string
   }
 }
 
@@ -23,5 +24,6 @@ declare module "next-auth/jwt" {
   interface JWT {
     user:User['user']
     idToken?: string
+    accessToken:string
   }
 }

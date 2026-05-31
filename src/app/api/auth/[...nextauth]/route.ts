@@ -2,6 +2,9 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import NextAuth, { NextAuthOptions } from "next-auth"
 
 export const NextOptions: NextAuthOptions = {
+    session: {
+    strategy: "jwt",
+  },
     pages: {
         signIn: "/signin",
     },
@@ -37,12 +40,13 @@ export const NextOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.token = user.token
+                token.accessToken = user.token
                 token.user = user.user
             }
             return token
         },
         async session({ session, token }) {
+            session.accessToken = token.accessToken
             session.user = token.user
             return session
         }
