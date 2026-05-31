@@ -14,14 +14,19 @@ const AddProductToCart = ({ Id }: { Id: string }) => {
     try {
       const data = await AddCart(Id);
       console.log(data);
-
+          if (data?.message === "NOT_AUTHENTICATED") {
+      toast.error("You should login first", {
+        position: "top-center",
+      });
+      return; 
+      }
       if (data?.status === 'success') {
         toast.success('Product added successfully', {
           position: 'top-center'
         });
         setadded(true)
         CountCart?.setcountCart((prev)=>prev+1)
-      } else {
+          } else {
         toast.error(data?.message || 'Something went wrong', {
           position: 'top-center'
         });
@@ -30,7 +35,7 @@ const AddProductToCart = ({ Id }: { Id: string }) => {
 
     } catch (error: any) {
       console.log('text1',error);
-      toast.error('you should login first', {
+      toast.error(error, {
         position: 'top-center'
       });
     }

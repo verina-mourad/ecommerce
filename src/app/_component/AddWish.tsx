@@ -16,9 +16,12 @@ const AddWish = ({ Id }: { Id: string }) => {
     try {
 
       const data = await AddWishlist(Id)
-
-      console.log(data)
-
+          if (data?.message === "NOT_AUTHENTICATED") {
+      toast.error("You should login first", {
+        position: "top-center",
+        });
+        return;
+        }
       if (data.status === 'success') {
 
         toast('successfully add product to wishlist', {

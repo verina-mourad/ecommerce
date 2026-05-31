@@ -1,12 +1,17 @@
-'use client'
+'use server'
 import { getUserToken } from '@src/getUserToken'
 import React from 'react'
+import { toast } from 'sonner'
 import { number } from 'zod'
 
 export async function AddCart(Id:string){
     const token:any =await getUserToken()
     if (!token) {
-        console.log('token',token);        
+        console.log('token',token); 
+        return {
+      success: false,
+      message: "NOT_AUTHENTICATED",
+    }
     throw new Error('token Error')
     }
     try{
@@ -22,7 +27,6 @@ export async function AddCart(Id:string){
         const data=await res.json()
         return data
     }catch(error){
-        console.log(error);
         throw error
         
     }
