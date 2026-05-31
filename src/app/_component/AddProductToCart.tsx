@@ -29,6 +29,7 @@ const AddProductToCart = ({ Id }: { Id: string }) => {
       }
 
     } catch (error: any) {
+      console.log('text1',error);
       toast.error('you should login first', {
         position: 'top-center'
       });

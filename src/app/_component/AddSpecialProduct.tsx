@@ -29,6 +29,7 @@ const AddSpecialProduct = ({ Id }: { Id: string }) => {
       }
 
     } catch (error: any) {
+      console.log('text2',error);
       toast.error('you should login first', {
         position: 'top-center'
       });
