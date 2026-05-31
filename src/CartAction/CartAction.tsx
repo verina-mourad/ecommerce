@@ -6,6 +6,7 @@ import { number } from 'zod'
 export async function AddCart(Id:string){
     const token:any =await getUserToken()
     if (!token) {
+        console.log('token',token);        
     throw new Error('token Error')
     }
     try{
