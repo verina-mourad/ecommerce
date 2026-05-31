@@ -1,4 +1,4 @@
-'use server'
+'use client'
 import { getUserToken } from '@src/getUserToken'
 import React from 'react'
 import { number } from 'zod'
