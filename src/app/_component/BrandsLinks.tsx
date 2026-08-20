@@ -1,53 +1,44 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { MdArrowForwardIos } from 'react-icons/md'
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { MdArrowForwardIos } from "react-icons/md";
+import { BrandsProduct } from "@src/types/brand";
 
-import React from 'react'
-import { BrandsProduct } from '@src/types/brand'
-import { Data } from '@src/types/specificbrand'
-
-const BrandsLinks = ({brands}:{brands:BrandsProduct[]}) => {
-  const path = usePathname()
-  const specificBrands = path.split('/').filter(Boolean)
-const getName = (id:string) => {
-  const item = brands.find((b) => b._id === id)
-  return item?.name
-}
+const BrandsLinks = () => {
+  const path = usePathname();
+  const specificBrands = path.split("/").filter(Boolean);
 
   return (
-    <div className="flex items-center gap-2 text-xs m-4">
-      
+    <div className="flex items-center gap-2 text-xs px-4 my-4">
       <Link
         href="/"
         className={`flex items-center gap-1 hover:text-blue-400 ${
-          path === '/' ? 'text-blue-500 font-semibold' : ''
+          path === "/" ? "text-blue-500 font-semibold" : ""
         }`}
       >
-        HOME <MdArrowForwardIos />
+        home <MdArrowForwardIos />
       </Link>
 
       {specificBrands.map((segment, index) => {
-        const href = '/' + specificBrands.slice(0, index + 1).join('/')
+        const href = "/" + specificBrands.slice(0, index + 1).join("/");
 
         return (
           <Link
-            href={href}
-            key={href}
-            className="flex items-center gap-1 hover:text-blue-400"
+            href="/"
+            className={`flex items-center gap-1 hover:text-blue-400 ${
+              path === "/brand" ? "text-blue-500 font-semibold" : ""
+            }`}
           >
-           {segment}
+            {segment}
 
             {/* ⛔ fix here */}
-            {index !== specificBrands.length - 1 && (
-              <MdArrowForwardIos />
-            )}
+            {index !== specificBrands.length - 1 && <MdArrowForwardIos />}
           </Link>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default BrandsLinks
+export default BrandsLinks;

@@ -1,61 +1,52 @@
-'use client'
+"use client";
 
 import { GetCart } from "@src/CartAction/CartAction";
 import { useSession } from "next-auth/react";
 import React, { createContext, useEffect, useState } from "react";
 
 type counttpe = {
-    countCart: number,
-    setcountCart: React.Dispatch<React.SetStateAction<number>>,
-    loading: boolean,
-    setloading: React.Dispatch<React.SetStateAction<boolean>>
-}
+  countCart: number;
+  setcountCart: React.Dispatch<React.SetStateAction<number>>;
+  loading: boolean;
+  setloading: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export const CartCount = createContext<counttpe | null>(null)
+export const CartCount = createContext<counttpe | null>(null);
 
 export function CartCountProvider({ children }: { children: React.ReactNode }) {
+  const [countCart, setcountCart] = useState<number>(0);
+  const [loading, setloading] = useState<boolean>(false);
 
-    const [countCart, setcountCart] = useState<number>(0)
-    const [loading, setloading] = useState<boolean>(false)
+  const { status } = useSession();
 
-    const { status } = useSession()
+  useEffect(() => {
+    async function fetchcart() {
+      if (status !== "authenticated") {
+        setcountCart(0);
+        return;
+      }
 
-    useEffect(() => {
+      try {
+        setloading(true);
 
-        async function fetchcart() {
+        const data = await GetCart();
 
-            if (status !== 'authenticated') {
-                setcountCart(0)
-                return
-            }
+        setcountCart(data.numOfCartItems);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setloading(false);
+      }
+    }
 
-            try {
+    fetchcart();
+  }, [status]);
 
-                setloading(true)
-
-                const data = await GetCart()
-
-                setcountCart(data.numOfCartItems)
-
-            } catch (error) {
-
-                console.log(error);
-
-            } finally {
-
-                setloading(false)
-            }
-        }
-
-        fetchcart()
-
-    }, [status])
-
-    return (
-        <CartCount.Provider
-            value={{ countCart, setcountCart, loading, setloading }}
-        >
-            {children}
-        </CartCount.Provider>
-    )
+  return (
+    <CartCount.Provider
+      value={{ countCart, setcountCart, loading, setloading }}
+    >
+      {children}
+    </CartCount.Provider>
+  );
 }

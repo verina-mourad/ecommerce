@@ -9,9 +9,9 @@
   @apply inline-block cursor-pointer transition-all duration-300 hover:text-blue-400 hover:translate-x-1;
 }
 .Links-contact {
-  @apply inline-block cursor-pointer transition-all duration-300 hover:text-blue-400 hover:translate-x-1 flex items-center gap-1;
+  @apply flex gap-2 cursor-pointer transition-all duration-300 hover:text-blue-400 hover:translate-x-1 flex items-center gap-1;
 }
 
-body{
+body {
   font-family: var(--font-inter);
 }
