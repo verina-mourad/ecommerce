@@ -119,7 +119,6 @@ const Page = () => {
       setLoading(false);
     }
   }
-
   useEffect(() => {
     GetAllProductCart();
   }, []);
