@@ -26,7 +26,6 @@ import { toast } from "sonner";
 
 import { LoadingContext } from "@src/Context/Loading";
 import Loading from "@src/app/loading";
-import { doSocialLogin } from "@src/app/actions";
 
 function Page() {
   const context = useContext(LoadingContext);
@@ -197,7 +196,7 @@ function Page() {
             </h2>
             <p className="text-gray-300 text-center text-sm">SOCIAL SIGNUP</p>
 
-            <form id="social-login" action={doSocialLogin} />
+            <form id="social-login" />
 
             <div className="flex items-center justify-between gap-4">
               {/* GOOGLE */}
