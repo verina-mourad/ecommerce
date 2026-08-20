@@ -28,7 +28,7 @@ function page() {
 
   if (!context) throw new Error("LoadingContext missing");
 
-  const { loading, setLoading } = context;
+  const { loading } = context;
 
   const router = useRouter();
   const SchemaSignIn = z.object({
